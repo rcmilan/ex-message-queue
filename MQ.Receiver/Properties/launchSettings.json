@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MQ.Receiver": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

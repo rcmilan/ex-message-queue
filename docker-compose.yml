@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  mq.receiver:
+    image: ${DOCKER_REGISTRY-}mqreceiver
+    build:
+      context: .
+      dockerfile: MQ.Receiver/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  mq.sender:
+    image: ${DOCKER_REGISTRY-}mqsender
+    build:
+      context: .
+      dockerfile: MQ.Sender/Dockerfile
+    depends_on:
+      - rabbitmq
+    networks:
+      - default
+
+  rabbitmq:
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    image: rabbitmq
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+    name: mq_net
