@@ -41,7 +41,7 @@ namespace MQ.Sender.MessageSenders
 
                 Console.WriteLine(" [x] Sent {0}", message);
 
-                await Task.Delay(500, stoppingToken);
+                await Task.Delay(1000, stoppingToken);
             }
         }
     }
