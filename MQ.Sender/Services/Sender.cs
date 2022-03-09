@@ -1,10 +1,18 @@
-﻿using RabbitMQ.Client;
+﻿using MQ.Sender.Interfaces;
+using RabbitMQ.Client;
 using System.Text;
 
 namespace MQ.Sender.Services
 {
     internal class Sender : BackgroundService
     {
+        private readonly IDateTimeService _dateTimeService;
+
+        public Sender(IDateTimeService dateTimeService)
+        {
+            _dateTimeService = dateTimeService;
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
@@ -19,7 +27,7 @@ namespace MQ.Sender.Services
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                string message = $"{DateTime.Now}: Hello World!";
+                string message = $"{_dateTimeService.Now()} - Hello World!";
 
                 var body = Encoding.UTF8.GetBytes(message);
 
@@ -30,7 +38,7 @@ namespace MQ.Sender.Services
 
                 Console.WriteLine(" [x] Sent {0}", message);
 
-                await Task.Delay(100, stoppingToken);
+                await Task.Delay(500, stoppingToken);
             }
         }
     }
