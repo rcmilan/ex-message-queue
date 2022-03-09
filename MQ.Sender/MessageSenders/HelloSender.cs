@@ -2,24 +2,27 @@
 using RabbitMQ.Client;
 using System.Text;
 
-namespace MQ.Sender.Services
+namespace MQ.Sender.MessageSenders
 {
-    internal class Sender : BackgroundService
+    internal class HelloSender : BackgroundService
     {
-        private readonly IDateTimeService _dateTimeService;
+        private const string HOST_NAME = "rabbitmq";
+        private const string QUEUE_NAME = "hello";
 
-        public Sender(IDateTimeService dateTimeService)
+        private readonly IDateTimeService _dateTimeService;
+        public HelloSender(IDateTimeService dateTimeService)
         {
             _dateTimeService = dateTimeService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory() { HostName = HOST_NAME };
+
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
-            channel.QueueDeclare(queue: "hello",
+            channel.QueueDeclare(queue: QUEUE_NAME,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
