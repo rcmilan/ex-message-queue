@@ -25,7 +25,7 @@ namespace MQ.Receiver.MessageReceivers
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                Console.WriteLine(" [RECEIVER A] Recebeu {0}", message.ToUpper());
+                Console.WriteLine(" ***** [RECEIVER A] Recebeu {0} *****", message.ToUpper());
             };
 
             channel.BasicConsume(queue: "hello",
