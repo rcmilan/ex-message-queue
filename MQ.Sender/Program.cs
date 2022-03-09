@@ -1,11 +1,12 @@
-﻿
+﻿using MQ.Sender.Interfaces;
 using MQ.Sender.Services;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddHostedService<Sender>();
+        services.AddScoped<IDateTimeService, DateTimeService>();
 
+        services.AddHostedService<Sender>();
     })
     .Build();
 
