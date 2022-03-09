@@ -8,6 +8,8 @@ services:
       dockerfile: MQ.Receiver/Dockerfile
     depends_on:
       - rabbitmq
+    networks:
+      - default
 
   mq.sender:
     image: ${DOCKER_REGISTRY-}mqsender
