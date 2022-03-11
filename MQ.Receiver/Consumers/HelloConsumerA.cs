@@ -29,10 +29,12 @@ namespace MQ.Receiver.Consumers
                 var message = Encoding.UTF8.GetString(body);
 
                 Console.WriteLine(" ***** [RECEIVER A] Recebeu {0} *****", message.ToUpper());
+
+                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
             };
 
             channel.BasicConsume(queue: QUEUE_NAME,
-                                 autoAck: true,
+                                 autoAck: false,
                                  consumer: consumer);
 
             while (!stoppingToken.IsCancellationRequested)
