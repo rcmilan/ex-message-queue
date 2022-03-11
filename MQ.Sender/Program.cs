@@ -1,5 +1,5 @@
 ﻿using MQ.Sender.Interfaces;
-using MQ.Sender.MessageSenders;
+using MQ.Sender.Producers;
 using MQ.Sender.Services;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -7,7 +7,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     {
         services.AddScoped<IDateTimeService, DateTimeService>();
 
-        services.AddHostedService<HelloSender>();
+        services.AddHostedService<HelloProducer>();
     })
     .Build();
 

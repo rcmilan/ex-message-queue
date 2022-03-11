@@ -2,15 +2,15 @@
 using RabbitMQ.Client;
 using System.Text;
 
-namespace MQ.Sender.MessageSenders
+namespace MQ.Sender.Producers
 {
-    internal class HelloSender : BackgroundService
+    internal class HelloProducer : BackgroundService
     {
         private const string HOST_NAME = "rabbitmq";
         private const string QUEUE_NAME = "hello";
 
         private readonly IDateTimeService _dateTimeService;
-        public HelloSender(IDateTimeService dateTimeService)
+        public HelloProducer(IDateTimeService dateTimeService)
         {
             _dateTimeService = dateTimeService;
         }

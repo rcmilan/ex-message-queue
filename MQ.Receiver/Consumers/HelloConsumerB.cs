@@ -2,9 +2,9 @@
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace MQ.Receiver.MessageReceivers
+namespace MQ.Receiver.Consumers
 {
-    internal class HelloReceiverB : BackgroundService
+    internal class HelloConsumerB : BackgroundService
     {
         private const string HOST_NAME = "rabbitmq";
         private const string QUEUE_NAME = "hello";

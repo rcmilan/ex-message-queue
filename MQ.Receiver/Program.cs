@@ -1,10 +1,10 @@
-﻿using MQ.Receiver.MessageReceivers;
+﻿using MQ.Receiver.Consumers;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddHostedService<HelloReceiverA>();
-        services.AddHostedService<HelloReceiverB>();
+        services.AddHostedService<HelloConsumerA>();
+        services.AddHostedService<HelloConsumerB>();
     })
     .Build();
 
