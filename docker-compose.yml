@@ -9,7 +9,7 @@ services:
     depends_on:
       - rabbitmq
     networks:
-      - default
+      - rabbitmq_net
 
   mq.sender:
     image: ${DOCKER_REGISTRY-}mqsender
@@ -19,7 +19,7 @@ services:
     depends_on:
       - rabbitmq
     networks:
-      - default
+      - rabbitmq_net
 
   rabbitmq:
     container_name: rabbitmq
@@ -29,11 +29,11 @@ services:
       - "15672:15672"
     image: rabbitmq:latest
     volumes:
-      - "./data:/var/lib/rabbitmq/mnesia/"
+        - .docker/rabbitmq/data/:/var/lib/rabbitmq/
+        - .docker/rabbitmq/log/:/var/log/rabbitmq
     networks:
-      - default
+      - rabbitmq_net
 
 networks:
-  default:
+  rabbitmq_net:
     driver: bridge
-    name: mq_net
