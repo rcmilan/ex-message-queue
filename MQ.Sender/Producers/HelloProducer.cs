@@ -28,6 +28,9 @@ namespace MQ.Sender.Producers
                                  autoDelete: false,
                                  arguments: null);
 
+            var properties = channel.CreateBasicProperties();
+            properties.Persistent = true;
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 string message = $"{_dateTimeService.Now()} - Hello World!";
@@ -36,7 +39,7 @@ namespace MQ.Sender.Producers
 
                 channel.BasicPublish(exchange: "",
                                      routingKey: QUEUE_NAME,
-                                     basicProperties: null,
+                                     basicProperties: properties,
                                      body: body);
 
                 Console.WriteLine(" [x] Sent {0}", message);
