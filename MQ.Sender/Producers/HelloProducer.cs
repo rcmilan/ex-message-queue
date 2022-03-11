@@ -6,7 +6,7 @@ namespace MQ.Sender.Producers
 {
     internal class HelloProducer : BackgroundService
     {
-        private const string HOST_NAME = "rabbitmq";
+        private const string HOST_NAME = "ex-rabbit";
         private const string QUEUE_NAME = "hello";
 
         private readonly IDateTimeService _dateTimeService;
@@ -35,7 +35,7 @@ namespace MQ.Sender.Producers
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(exchange: "",
-                                     routingKey: "hello",
+                                     routingKey: QUEUE_NAME,
                                      basicProperties: null,
                                      body: body);
 

@@ -6,7 +6,7 @@ namespace MQ.Receiver.Consumers
 {
     internal class HelloConsumerA : BackgroundService
     {
-        private const string HOST_NAME = "rabbitmq";
+        private const string HOST_NAME = "ex-rabbit";
         private const string QUEUE_NAME = "hello";
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,7 +31,7 @@ namespace MQ.Receiver.Consumers
                 Console.WriteLine(" ***** [RECEIVER A] Recebeu {0} *****", message.ToUpper());
             };
 
-            channel.BasicConsume(queue: "hello",
+            channel.BasicConsume(queue: QUEUE_NAME,
                                  autoAck: true,
                                  consumer: consumer);
 
